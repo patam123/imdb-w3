@@ -44,20 +44,24 @@ class Card extends Component {
     ));
   }
   generateActor() {
-    let actorNotFound = true;
-    while (actorNotFound) {
+    let actorsNotFound = true;
+    let count = 0;
+    while (actorsNotFound) {
       let random = Math.floor(Math.random() * actors.length);
 
       if (!this.state.rows.includes(actors[random])) {
         this.state.rows.push(actors[random]);
-        actorNotFound = false;
+        count++;
+        if(count === 5){
+          actorsNotFound = false;
+        }
       }
     }
     this.setState({
       rows: this.state.rows,
     });
   }
-  
+
   nameSort() {
     this.setState({
       rows: this.state.rows.sort((a, b) => a.name.localeCompare(b.name)),
